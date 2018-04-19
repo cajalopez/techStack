@@ -7,15 +7,15 @@ class LibraryList extends Component {
 
   componentWillMount(){
 
-    const dataSourceBindingFunction = new ListView.dataSource({
-        rowHasChanged: (r1,r2) = > r1 !== r2
+    const dataSourceBindingFunction = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2
       });
 
     this.dataSource = dataSourceBindingFunction.cloneWithRows(this.props.libraries);
   }
 
-  renderRowFunction(){
-
+  renderRow(library){
+    return <ListItem library={library} />;
   }
 
 
@@ -23,9 +23,11 @@ class LibraryList extends Component {
     return (
       <ListView
         dataSource={this.dataSource}
+        renderRow={this.renderRow}
       />
     );
   }
+
 }
 
 const mapStateToProps = state => {
